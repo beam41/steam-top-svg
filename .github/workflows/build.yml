@@ -1,0 +1,37 @@
+on:
+  push:
+    paths-ignore:
+      - 'dist/**'
+      - README.md
+
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+        with:
+          persist-credentials: false
+      - name: Setup Node.js environment
+        uses: actions/setup-node@main
+        with:
+          node-version: 12
+      - name: Install Node modules
+        run: npm install
+      - name: Install ncc
+        run: npm i -g @vercel/ncc
+      - name: Build dist
+        run: ncc build index.js
+      - name: Commit file
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Build index.js"
+      - name: Push change
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          force: true
+

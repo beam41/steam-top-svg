@@ -1,0 +1,33 @@
+name: "Spotify top song update"
+description: "Update the image of your top listening"
+inputs:
+  imgHeight:
+    description: "Height of the image"
+    required: true
+  txtFontSizeSong:
+    description: "Font size for song name label"
+    required: true
+  txtFontSizeArtist:
+    description: "Font size for artist name label"
+    required: true
+  txtMaxWidth:
+    description: "Maximum width for text label"
+    required: true
+  rawBasePath:
+    description: "Base path for raw image"
+    required: true
+  baseSvgPath:
+    description: "Svg path for base image"
+    required: true
+  token:
+    description: "Refresh token from Spotify"
+    required: true
+  clientId:
+    description: "Spotify app client id"
+    required: true
+  cliSecret:
+    description: "Spotify app client secret"
+    required: true
+runs:
+  using: "node12"
+  main: "dist/index.js"
