@@ -20,7 +20,7 @@ jobs:
         with:
           rawBasePath: https://raw.githubusercontent.com/beam41/steam-top-svg/main/
           apiKey: ${{ secrets.STEAM_KEY }}
-          steamId: 76561198062644260
+          steamId: '76561198062644260'
       - name: Commit file
         run: |
           git config --local user.email "action@github.com"
