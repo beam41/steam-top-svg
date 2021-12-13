@@ -117,7 +117,7 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
     clip-path="url(#ico${positionY})"
   />
   <text
-    x="36"
+    x="40"
     y="${positionY + 16}"
     fill="${textColor}"
     font-family="Arial"
@@ -126,7 +126,7 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
     font-size="11"
     font-weight="600"
   >
-    ${fitText(name, "sans-serif", 11, 177 - playtimeWidth, true)}
+    ${fitText(name, "sans-serif", 11, 173 - playtimeWidth, true)}
   </text>
   <text
     x="217"
