@@ -10,7 +10,6 @@ async function draw(game) {
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 225 ${fullHeight}"
-    height="${fullHeight}"
   >
     <defs>
       <linearGradient id="gradient" gradientTransform="rotate(90)">
@@ -55,7 +54,7 @@ async function draw(game) {
       font-size="10"
       font-weight="600"
     >
-      ${game0.time2w}h (${game0.timeTotal}h total)
+      ${mapHour(game0.time2w)}h (${mapHour(game0.timeTotal)}h total)
     </text>`;
 
   for (const [i, v] of game.entries()) {
@@ -63,7 +62,7 @@ async function draw(game) {
   }
 
   content += `</svg>`;
-  return content;
+  return { content, fullHeight };
 }
 
 /**
@@ -101,7 +100,7 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
   />
   <image
     href="data:image/jpeg;base64,${imgBuffer.toString("base64")}"
-    x="4"
+    x="8"
     y="${positionY + 4}"
     width="24"
     height="24"
@@ -129,7 +128,15 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
     font-size="11"
     font-weight="600"
   >
-    ${time2w}h (${timeTotal}h total)
+    ${mapHour(time2w)}h (${mapHour(timeTotal)}h total)
   </text>`;
 }
 
+function mapHour(min) {
+  return (min / 60).toLocaleString("en-US", {
+    maximumFractionDigits: 1,
+    minimumFractionDigits: 0,
+  });
+}
+
+module.exports = { draw };

@@ -32,4 +32,4 @@ function fitText(text, font, fontSize, maxWidth, isBold = false) {
   }
 }
 
-module.exports = { loadImgBuffer, getDominantColor, fitText};
+module.exports = { loadImgBuffer, getDominantColor, fitText };
