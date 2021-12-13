@@ -7,7 +7,7 @@ on:
 jobs:
   spotify-to-readme-job:
     runs-on: windows-2019
-    name: Write Spotify songs to readme
+    name: Write steam svg
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -18,16 +18,9 @@ jobs:
         id: spotify
         uses: beam41/spotify-listening-svg@main
         with:
-          imgHeight: 400
-          txtFont: Arial
-          txtFontSizeSong: 18
-          txtFontSizeArtist: 16
-          txtMaxWidth: 180
-          rawBasePath: https://raw.githubusercontent.com/beam41/spotify-listening-svg/dev/
-          baseSvgPath: ./base.svg
-          token: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
-          clientId: ${{ secrets.SPOTIFY_CLIENT_ID }}
-          cliSecret: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          rawBasePath: https://raw.githubusercontent.com/beam41/steam-top-svg/main/
+          apiKey: ${{ secrets.STEAM_KEY }}
+          steamId: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
       - name: Commit file
         run: |
           git config --local user.email "action@github.com"
