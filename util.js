@@ -32,4 +32,11 @@ function fitText(text, font, fontSize, maxWidth, isBold = false) {
   }
 }
 
-module.exports = { loadImgBuffer, getDominantColor, fitText };
+function measureText(text, font, fontSize, isBold = false) {
+  const canvas = createCanvas(2000, fontSize);
+  const ctx = canvas.getContext("2d");
+  ctx.font = `${isBold ? "bold" : ""} ${fontSize}px ${font}`;
+  return ctx.measureText(text).width;
+}
+
+module.exports = { loadImgBuffer, getDominantColor, fitText, measureText };

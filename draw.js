@@ -1,4 +1,4 @@
-const { loadImgBuffer, getDominantColor } = require("./util");
+const { loadImgBuffer, getDominantColor, fitText, measureText } = require("./util");
 
 /** @param {{name: string, time2w: number, timeTotal: number, imgUrl: string}[]} game */
 async function draw(game) {
@@ -9,7 +9,7 @@ async function draw(game) {
   let content = `<svg
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    viewBox="0 0 225 ${fullHeight}"
+    viewBox="0 0 225 ${fullHeight}" height="${fullHeight}"
   >
     <defs>
       <linearGradient id="gradient" gradientTransform="rotate(90)">
@@ -42,7 +42,7 @@ async function draw(game) {
       font-size="16"
       font-weight="600"
     >
-      ${game0.name}
+      ${fitText(game0.name, "sans-serif", 16, 209, true)}
     </text>
     <text
       x="8"
@@ -74,6 +74,10 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
   const dominantColor = await getDominantColor(imgBuffer);
   const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";
   const shadowColor = dominantColor.isDark() ? "#24292f" : "#c9d1d9";
+
+  const playtimeText = `${mapHour(time2w)}h (${mapHour(timeTotal)}h total)`;
+  const playtimeWidth = measureText(playtimeText, "sans-serif", 11);
+  console.log(playtimeWidth);
   return `<defs>
     <clipPath id="ico${positionY}">
       <rect x="8" y="${positionY + 4}" width="24" height="24" rx="4" />
@@ -116,7 +120,7 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
     font-size="11"
     font-weight="600"
   >
-    ${name}
+    ${fitText(name, "sans-serif", 11, 177 - playtimeWidth, true)}
   </text>
   <text
     x="217"
@@ -126,9 +130,8 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
     dominant-baseline="middle"
     text-anchor="end"
     font-size="11"
-    font-weight="600"
   >
-    ${mapHour(time2w)}h (${mapHour(timeTotal)}h total)
+    ${playtimeText}
   </text>`;
 }
 

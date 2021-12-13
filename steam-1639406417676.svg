@@ -1,7 +1,7 @@
 <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    viewBox="0 0 225 137"
+    viewBox="0 0 225 137" height="137"
   >
     <defs>
       <linearGradient id="gradient" gradientTransform="rotate(90)">
@@ -87,7 +87,7 @@
     font-size="11"
     font-weight="600"
   >
-    WorldBox - God Simulator
+    WorldBox - God...
   </text>
   <text
     x="217"
@@ -97,7 +97,6 @@
     dominant-baseline="middle"
     text-anchor="end"
     font-size="11"
-    font-weight="600"
   >
     0.2h (0.2h total)
   </text></svg>

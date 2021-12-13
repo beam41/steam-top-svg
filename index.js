@@ -4,9 +4,9 @@ const { draw } = require("./draw");
 const { getStats } = require("./steam");
 
 async function main() {
-  // const apiKey = core.getInput("apiKey", { required: true });
-  // const steamId = core.getInput("steamId", { required: true });
-  // const rawBasePath = core.getInput("rawBasePath", { required: true });
+  const apiKey = core.getInput("apiKey", { required: true });
+  const steamId = core.getInput("steamId", { required: true });
+  const rawBasePath = core.getInput("rawBasePath", { required: true });
 
 
   const { content, fullHeight } = await draw(await getStats(apiKey, steamId));
