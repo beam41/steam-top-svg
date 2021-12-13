@@ -14,13 +14,13 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Get info from Spotify and write new readme
+      - name: Get info from steam and write new readme
         id: spotify
-        uses: beam41/spotify-listening-svg@main
+        uses: beam41/steam-top-svg@main
         with:
           rawBasePath: https://raw.githubusercontent.com/beam41/steam-top-svg/main/
           apiKey: ${{ secrets.STEAM_KEY }}
-          steamId: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          steamId: 76561198062644260
       - name: Commit file
         run: |
           git config --local user.email "action@github.com"
