@@ -54,7 +54,7 @@ async function draw(game) {
       font-size="10"
       font-weight="600"
     >
-      ${mapHour(game0.time2w)}h (last two weeks)/${mapHour(
+      ${mapHour(game0.time2w)}h (2 weeks)/${mapHour(
     game0.timeTotal
   )}h (total)
     </text>`;
