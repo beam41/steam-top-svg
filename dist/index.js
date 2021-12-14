@@ -60,7 +60,7 @@ async function draw(game) {
       font-size="10"
       font-weight="600"
     >
-      ${mapHour(game0.time2w)}h (last two weeks)/${mapHour(
+      ${mapHour(game0.time2w)}h (2 weeks)/${mapHour(
     game0.timeTotal
   )}h (total)
     </text>`;
@@ -81,7 +81,6 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
   const imgBuffer = await loadImgBuffer(imgUrl);
   const dominantColor = await getDominantColor(imgBuffer);
   const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";
-  const shadowColor = dominantColor.isDark() ? "#24292f" : "#c9d1d9";
 
   const playtimeText = `${mapHour(time2w)}h/${mapHour(timeTotal)}h`;
   const playtimeWidth = measureText(playtimeText, "sans-serif", 11);
@@ -91,7 +90,7 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
       <rect x="8" y="${positionY + 4}" width="24" height="24" rx="4" />
     </clipPath>
     <filter id='shadow${positionY}' color-interpolation-filters="sRGB">
-      <feDropShadow dx="0.5" dy="0.5" stdDeviation="1" flood-opacity="1" flood-color="${shadowColor}"/>
+      <feDropShadow dx="0.5" dy="0.5" stdDeviation="1" flood-opacity="1" flood-color="${textColor}"/>
     </filter>
   </defs>
   <rect
