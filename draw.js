@@ -54,7 +54,9 @@ async function draw(game) {
       font-size="10"
       font-weight="600"
     >
-      ${mapHour(game0.time2w)}h (${mapHour(game0.timeTotal)}h total)
+      ${mapHour(game0.time2w)}h (last two weeks)/${mapHour(
+    game0.timeTotal
+  )}h (total)
     </text>`;
 
   for (const [i, v] of game.entries()) {
@@ -75,7 +77,7 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
   const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";
   const shadowColor = dominantColor.isDark() ? "#24292f" : "#c9d1d9";
 
-  const playtimeText = `${mapHour(time2w)}h (${mapHour(timeTotal)}h total)`;
+  const playtimeText = `${mapHour(time2w)}h/${mapHour(timeTotal)}h`;
   const playtimeWidth = measureText(playtimeText, "sans-serif", 11);
   console.log(playtimeWidth);
   return `<defs>
