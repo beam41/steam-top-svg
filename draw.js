@@ -84,7 +84,7 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
       <rect x="8" y="${positionY + 4}" width="24" height="24" rx="4" />
     </clipPath>
     <filter id='shadow${positionY}' color-interpolation-filters="sRGB">
-      <feDropShadow dx="0.5" dy="0.5" stdDeviation="1" flood-opacity="1" flood-color="${textColor}"/>
+      <feDropShadow dx="0.5" dy="0.5" stdDeviation="1" flood-opacity="1" flood-color="#242424"/>
     </filter>
   </defs>
   <rect
