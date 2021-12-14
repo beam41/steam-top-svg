@@ -74,7 +74,7 @@ async function draw(game) {
 async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
   const imgBuffer = await loadImgBuffer(imgUrl);
   const dominantColor = await getDominantColor(imgBuffer);
-  const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";=
+  const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";
 
   const playtimeText = `${mapHour(time2w)}h/${mapHour(timeTotal)}h`;
   const playtimeWidth = measureText(playtimeText, "sans-serif", 11);
