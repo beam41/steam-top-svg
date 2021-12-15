@@ -137,10 +137,11 @@ async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
 }
 
 function mapHour(min) {
-  return (min / 60).toLocaleString("en-US", {
+  const str = (min / 60).toLocaleString("en-US", {
     maximumFractionDigits: 1,
     minimumFractionDigits: 0,
   });
+  return str === "0" ? "0.1" : str;
 }
 
 module.exports = { draw };
