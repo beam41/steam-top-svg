@@ -11,10 +11,15 @@ function loadImgBuffer(url) {
 }
 
 async function getDominantColor(buffer) {
-  await writeFile("tempImg.jpg", buffer);
-  const result = await colorthief.getColor("tempImg.jpg", 1);
-  await unlink("tempImg.jpg");
-  return Color.rgb(result);
+  try {
+    await writeFile("tempImg.jpg", buffer);
+    const result = await colorthief.getColor("tempImg.jpg", 1);
+    return Color.rgb(result);
+  } catch {
+    return Color.rgb(62, 78, 105);
+  } finally {
+    await unlink("tempImg.jpg");
+  }
 }
 
 function fitText(text, font, fontSize, maxWidth, isBold = false) {
