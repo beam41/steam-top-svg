@@ -68,7 +68,7 @@ async function draw(game) {
         "font-size": 16,
         "font-weight": 600,
       },
-      fitText(game0.name, "sans-serif", 16, 209, true),
+      fitText(game0.name, "Arial", 16, 209, true),
     ),
     $(
       "text",
@@ -105,7 +105,7 @@ async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
   const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";
 
   const playtimeText = `${mapTime(time2w)} / ${mapTime(timeTotal)}`;
-  const playtimeWidth = measureText(playtimeText, "sans-serif", 11);
+  const playtimeWidth = measureText(playtimeText, "Arial", 11);
 
   return [
     $(
@@ -164,7 +164,7 @@ async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
         "font-size": 11,
         "font-weight": 600,
       },
-      fitText(name, "sans-serif", 11, 173 - playtimeWidth, true),
+      fitText(name, "Arial", 11, 176 - playtimeWidth, true),
     ),
     $(
       "text",
