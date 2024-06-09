@@ -82,7 +82,7 @@ async function draw(game) {
         "font-size": 10,
         "font-weight": 600,
       },
-      `${mapTime(game0.time2w, true)} (2 weeks)/${mapTime(game0.timeTotal, true)} (total)`,
+      `${mapTime(game0.time2w, true)} (2 weeks) / ${mapTime(game0.timeTotal, true)} (total)`,
     ),
     ...(await Promise.all(
       game.slice(1).map((v, i) => drawOther(v, 105 + 32 * i)),
@@ -104,7 +104,7 @@ async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
   const dominantColor = await getDominantColor(imgBuffer);
   const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";
 
-  const playtimeText = `${mapTime(time2w)}/${mapTime(timeTotal)}`;
+  const playtimeText = `${mapTime(time2w)} / ${mapTime(timeTotal)}`;
   const playtimeWidth = measureText(playtimeText, "sans-serif", 11);
 
   return [
