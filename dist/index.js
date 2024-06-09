@@ -1,160 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 2909:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const { loadImgBuffer, getDominantColor, fitText, measureText } = __nccwpck_require__(713);
-
-/** @param {{name: string, time2w: number, timeTotal: number, imgUrl: string}[]} game */
-async function draw(game) {
-  const game0 = game.shift();
-
-  const fullHeight = 105 + 32 * game.length;
-
-  let content = `<svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    viewBox="0 0 225 ${fullHeight}" height="${fullHeight}"
-  >
-    <defs>
-      <linearGradient id="gradient" gradientTransform="rotate(90)">
-        <stop offset="0" stop-color="rgba(0,0,0,0)" />
-        <stop offset="1" stop-color="rgba(0,0,0,1)" />
-      </linearGradient>
-      <clipPath id="fullCliping">
-        <rect x="0" y="0" width="225" height="${fullHeight}" rx="4" />
-      </clipPath>
-    </defs>
-    <image
-      href="data:image/jpeg;base64,${(
-        await loadImgBuffer(game0.imgUrl)
-      ).toString("base64")}"
-      x="0"
-      y="0"
-      width="225"
-      height="105"
-      preserveAspectRatio="xMinYMin"
-      clip-path="url(#fullCliping)"
-    />
-    <rect x="0" y="0" width="225" height="105" fill="url(#gradient)" />
-    <text
-      x="8"
-      y="84"
-      fill="#c9d1d9"
-      font-family="Arial"
-      dominant-baseline="text-top"
-      text-anchor="start"
-      font-size="16"
-      font-weight="600"
-    >
-      ${fitText(game0.name, "sans-serif", 16, 209, true)}
-    </text>
-    <text
-      x="8"
-      y="97"
-      fill="#c9d1d9"
-      font-family="Arial"
-      dominant-baseline="text-top"
-      text-anchor="start"
-      font-size="10"
-      font-weight="600"
-    >
-      ${mapHour(game0.time2w)}h (2 weeks)/${mapHour(
-    game0.timeTotal
-  )}h (total)
-    </text>`;
-
-  for (const [i, v] of game.entries()) {
-    content += await drawOther(v, 105 + 32 * i);
-  }
-
-  content += `</svg>`;
-  return { content, fullHeight };
-}
-
-/**
- * @param {{name: string, time2w: number, timeTotal: number, imgUrl: string}} game
- * @param {number} positionY
- */
-async function drawOther({ name, time2w, timeTotal, imgUrl }, positionY) {
-  const imgBuffer = await loadImgBuffer(imgUrl);
-  const dominantColor = await getDominantColor(imgBuffer);
-  const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";
-
-  const playtimeText = `${mapHour(time2w)}h/${mapHour(timeTotal)}h`;
-  const playtimeWidth = measureText(playtimeText, "sans-serif", 11);
-  console.log(playtimeWidth);
-  return `<defs>
-    <clipPath id="ico${positionY}">
-      <rect x="8" y="${positionY + 4}" width="24" height="24" rx="4" />
-    </clipPath>
-    <filter id='shadow${positionY}' color-interpolation-filters="sRGB">
-      <feDropShadow dx="0.5" dy="0.5" stdDeviation="1" flood-opacity="1" flood-color="#242424"/>
-    </filter>
-  </defs>
-  <rect
-    y="${positionY}"
-    width="225"
-    height="32"
-    fill="${dominantColor.string()}"
-    clip-path="url(#fullCliping)"
-  />
-  <rect
-    x="8"
-    y="${positionY + 4}"
-    width="24"
-    height="24"
-    rx="4"
-    fill="${dominantColor.string()}"
-    filter="url(#shadow${positionY})"
-  />
-  <image
-    href="data:image/jpeg;base64,${imgBuffer.toString("base64")}"
-    x="8"
-    y="${positionY + 4}"
-    width="24"
-    height="24"
-    clip-path="url(#ico${positionY})"
-  />
-  <text
-    x="40"
-    y="${positionY + 16}"
-    fill="${textColor}"
-    font-family="Arial"
-    dominant-baseline="middle"
-    text-anchor="start"
-    font-size="11"
-    font-weight="600"
-  >
-    ${fitText(name, "sans-serif", 11, 173 - playtimeWidth, true)}
-  </text>
-  <text
-    x="217"
-    y="${positionY + 16}"
-    fill="${textColor}"
-    font-family="Arial"
-    dominant-baseline="middle"
-    text-anchor="end"
-    font-size="11"
-  >
-    ${playtimeText}
-  </text>`;
-}
-
-function mapHour(min) {
-  const str = (min / 60).toLocaleString("en-US", {
-    maximumFractionDigits: 1,
-    minimumFractionDigits: 0,
-  });
-  return str === "0" ? "0.1" : str;
-}
-
-module.exports = { draw };
-
-
-/***/ }),
-
 /***/ 40:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -49558,26 +49404,263 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 1980:
+/***/ 3517:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const {
+  loadImgBuffer,
+  getDominantColor,
+  fitText,
+  measureText,
+} = __nccwpck_require__(4947);
+const { xmlElement: $, mapHour } = __nccwpck_require__(1991);
+
+/** @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]} game */
+async function draw(game) {
+  const game0 = game.shift();
+
+  const fullHeight = 105 + 32 * game.length;
+
+  const content = $(
+    "svg",
+    {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: `0 0 225 ${fullHeight}`,
+      height: fullHeight,
+    },
+    $(
+      "defs",
+      null,
+      $(
+        "linearGradient",
+        { id: "gradient", gradientTransform: "rotate(90)" },
+        $("stop", { offset: 0, "stop-color": "rgba(0,0,0,0)" }),
+        $("stop", { offset: 1, "stop-color": "rgba(0,0,0,1)" }),
+      ),
+      $(
+        "clipPath",
+        { id: "fullCliping" },
+        $("rect", { x: 0, y: 0, width: 225, height: fullHeight, rx: 4 }),
+      ),
+    ),
+    $("image", {
+      href: `data:image/jpeg;base64,${(
+        await loadImgBuffer(
+          `https://cdn.cloudflare.steamstatic.com/steam/apps/${game0.id}/header.jpg`,
+        )
+      ).toString("base64")}`,
+      x: 0,
+      y: 0,
+      width: 225,
+      height: 105,
+      preserveAspectRatio: "xMinYMin",
+      "clip-path": "url(#fullCliping)",
+    }),
+    $("rect", {
+      x: 0,
+      y: 0,
+      width: 225,
+      height: 105,
+      fill: "url(#gradient)",
+    }),
+    $(
+      "text",
+      {
+        x: 8,
+        y: 84,
+        fill: "#c9d1d9",
+        "font-family": "Arial",
+        "dominant-baseline": "text-top",
+        "text-anchor": "start",
+        "font-size": 16,
+        "font-weight": 600,
+      },
+      fitText(game0.name, "sans-serif", 16, 209, true),
+    ),
+    $(
+      "text",
+      {
+        x: 8,
+        y: 97,
+        fill: "#c9d1d9",
+        "font-family": "Arial",
+        "dominant-baseline": "text-top",
+        "text-anchor": "start",
+        "font-size": 10,
+        "font-weight": 600,
+      },
+      `${mapHour(game0.time2w)}h (2 weeks)/${mapHour(game0.timeTotal)}h (total)`,
+    ),
+    ...(await Promise.all(
+      game.slice(1).map(async (v, i) => await drawOther(v, 105 + 32 * i)),
+    )),
+  );
+
+  return { content, fullHeight };
+}
+
+/**
+ * @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}} game
+ * @param {number} positionY
+ */
+async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
+  const imgBuffer = await loadImgBuffer(
+    `http://media.steampowered.com/steamcommunity/public/images/apps/${id}/${imgIco}.jpg`,
+  );
+  const dominantColor = await getDominantColor(imgBuffer);
+  const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";
+
+  const playtimeText = `${mapHour(time2w)}h/${mapHour(timeTotal)}h`;
+  const playtimeWidth = measureText(playtimeText, "sans-serif", 11);
+
+  return [
+    $(
+      "defs",
+      null,
+      $(
+        "clipPath",
+        { id: `ico${positionY}` },
+        $("rect", { x: 8, y: positionY + 4, width: 24, height: 24, rx: 4 }),
+      ),
+      $(
+        "filter",
+        { id: `shadow${positionY}`, "color-interpolation-filters": "sRGB" },
+        $("feDropShadow", {
+          dx: 0.5,
+          dy: 0.5,
+          stdDeviation: "1",
+          "flood-opacity": "1",
+          "flood-color": "#242424",
+        }),
+      ),
+    ),
+    $("rect", {
+      y: positionY,
+      width: 225,
+      height: 32,
+      fill: dominantColor.string(),
+      "clip-path": "url(#fullCliping)",
+    }),
+    $("rect", {
+      x: 8,
+      y: positionY + 4,
+      width: 24,
+      height: 24,
+      rx: 4,
+      fill: dominantColor.string(),
+      filter: `url(#shadow${positionY})`,
+    }),
+    $("image", {
+      href: `data:image/jpeg;base64,${imgBuffer.toString("base64")}`,
+      x: 8,
+      y: positionY + 4,
+      width: 24,
+      height: 24,
+      "clip-path": `url(#ico${positionY})`,
+    }),
+    $(
+      "text",
+      {
+        x: 40,
+        y: positionY + 16,
+        fill: textColor,
+        "font-family": "Arial",
+        "dominant-baseline": "middle",
+        "text-anchor": "start",
+        "font-size": 11,
+        "font-weight": 600,
+      },
+      fitText(name, "sans-serif", 11, 173 - playtimeWidth, true),
+    ),
+    $(
+      "text",
+      {
+        x: 217,
+        y: positionY + 16,
+        fill: textColor,
+        "font-family": "Arial",
+        "dominant-baseline": "middle",
+        "text-anchor": "end",
+        "font-size": 11,
+      },
+      playtimeText,
+    ),
+  ].join("");
+}
+
+module.exports = { draw };
+
+
+/***/ }),
+
+/***/ 1991:
+/***/ ((module) => {
+
+/**
+ * @param {string} tag
+ * @param {Object.<string, *>?} attrs
+ * @param {...string} children
+ * @return {string} result html element
+ */
+function xmlElement(tag, attrs, ...children) {
+  let element = `<${tag}`;
+
+  if (attrs) {
+    for (const [name, value] of Object.entries(attrs)) {
+      element += ` ${name}="${value}"`;
+    }
+  }
+
+  if (children.length === 0) {
+    element += "/>";
+    return element;
+  }
+
+  element += `>${children.join("")}</${tag}>`;
+  return element;
+}
+
+/**
+ * @param {number} minute
+ * @return {string} result
+ */
+function mapHour(minute) {
+  const str = (minute / 60).toLocaleString("en-US", {
+    maximumFractionDigits: 1,
+    minimumFractionDigits: 0,
+  });
+  return str === "0" ? "0.1" : str;
+}
+
+module.exports = { xmlElement, mapHour };
+
+
+/***/ }),
+
+/***/ 97:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const fetch = __nccwpck_require__(7021);
+
+/**
+ * @param {string} key
+ * @param {string} id
+ * @return {Promise<{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]>} game
+ */
 async function getStats(key, id) {
   const res = await fetch(
-    `https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key=${key}&steamid=${id}`
+    `https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key=${key}&steamid=${id}`,
   );
   const json = await res.json();
   return json.response.games
-      .filter((game) => game.name)
-      .map((game, i) => ({
-        name: game.name,
-        time2w: game.playtime_2weeks,
-        timeTotal: game.playtime_forever,
-        imgUrl:
-          i === 0
-            ? `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`
-            : `http://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`,
-      }));
+    .filter((game) => game.name)
+    .map((game) => ({
+      id: game.appid,
+      name: game.name,
+      time2w: game.playtime_2weeks,
+      timeTotal: game.playtime_forever,
+      imgIco: game.img_icon_url,
+    }));
 }
 
 module.exports = { getStats };
@@ -49585,7 +49668,7 @@ module.exports = { getStats };
 
 /***/ }),
 
-/***/ 713:
+/***/ 4947:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const fetch = __nccwpck_require__(7021);
@@ -49594,12 +49677,20 @@ const colorthief = __nccwpck_require__(8973);
 const { writeFile, unlink } = (__nccwpck_require__(7147).promises);
 const { createCanvas } = __nccwpck_require__(8361);
 
+/**
+ * @param {string} url
+ * @return {Promise<Buffer>}
+ */
 function loadImgBuffer(url) {
   return new Promise((resolve, reject) => {
     fetch(url, {}).then((response) => resolve(response.buffer()));
   });
 }
 
+/**
+ * @param {Buffer} buffer
+ * @return {Color}
+ */
 async function getDominantColor(buffer) {
   try {
     await writeFile("tempImg.jpg", buffer);
@@ -49612,6 +49703,14 @@ async function getDominantColor(buffer) {
   }
 }
 
+/**
+ * @param {string} text
+ * @param {string} font
+ * @param {number} fontSize
+ * @param {number} maxWidth
+ * @param {boolean} [isBold=false]
+ * @return {string} Text with ellipsis to fit `maxWidth`
+ */
 function fitText(text, font, fontSize, maxWidth, isBold = false) {
   const canvas = createCanvas(maxWidth, fontSize);
   const ctx = canvas.getContext("2d");
@@ -49620,13 +49719,20 @@ function fitText(text, font, fontSize, maxWidth, isBold = false) {
   while (true) {
     const currWidth = ctx.measureText(text + (ellipsis ? "..." : "")).width;
     if (currWidth <= maxWidth) {
-      return text.replace(/&/g, '&amp;') + (ellipsis ? "..." : "");
+      return text.replace(/&/g, "&amp;") + (ellipsis ? "..." : "");
     }
     text = text.substring(0, text.length - 1);
     ellipsis = true;
   }
 }
 
+/**
+ * @param {string} text
+ * @param {string} font
+ * @param {number} fontSize
+ * @param {boolean} [isBold=false]
+ * @return {number} Text width
+ */
 function measureText(text, font, fontSize, isBold = false) {
   const canvas = createCanvas(2000, fontSize);
   const ctx = canvas.getContext("2d");
@@ -49778,7 +49884,7 @@ module.exports = require("url");
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("src/util");
+module.exports = require("util");
 
 /***/ }),
 
@@ -50033,25 +50139,24 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(4799);
 const { readFile, writeFile, readdir, unlink } = (__nccwpck_require__(7147).promises);
-const { draw } = __nccwpck_require__(2909);
-const { getStats } = __nccwpck_require__(1980);
+const { draw } = __nccwpck_require__(3517);
+const { getStats } = __nccwpck_require__(97);
+const { xmlElement: $ } = __nccwpck_require__(1991);
 
 async function main() {
   const apiKey = core.getInput("apiKey", { required: true });
   const steamId = core.getInput("steamId", { required: true });
   const rawBasePath = core.getInput("rawBasePath", { required: true });
 
+  const stats = await getStats(apiKey, rawBasePath);
 
-  const { content, fullHeight } = await draw(await getStats(apiKey, steamId));
-
-  console.log("Remove old img file");
-  const fileToDel = (await readdir(".")).filter((f) =>
-    /^steam-\d+\.svg$/.test(f)
-  );
-
-  for await (const f of fileToDel) {
-    unlink(f);
+  if (stats.length === 0) {
+    console.error("No steam stats, exit");
+    return;
   }
+
+  console.log("Draw new img file");
+  const { content, fullHeight } = await draw(stats);
 
   console.log("Write new img file");
   let fileName = `steam-${Date.now()}.svg`;
@@ -50059,19 +50164,30 @@ async function main() {
 
   console.log("Write readme");
   let readme = (await readFile("README.md")).toString("utf8");
-  let imgTag = `<a href="http://steamcommunity.com/profiles/${steamId}">
-  <img src="${rawBasePath.replace(
-    /\/$/,
-    ""
-  )}/${fileName}" height="${fullHeight}"/></a>`;
+  let imgTag = $(
+    "a",
+    { href: `http://steamcommunity.com/profiles/${steamId}` },
+    $("img", {
+      src: `${rawBasePath.replace(/\/$/, "")}/${fileName}`,
+      height: fullHeight,
+    }),
+  );
 
   readme = readme.replace(
     /<!-- *steam-svg-start *-->[^]*<!-- *steam-svg-end *-->/gi,
     "<!-- steam-svg-start -->\n" +
       `<p align="center">${imgTag}</p>\n` +
-      "<!-- steam-svg-end -->"
+      "<!-- steam-svg-end -->",
   );
   await writeFile("README.md", readme);
+
+  console.log("Remove old img file");
+  const fileToDel = (await readdir(".")).filter((f) =>
+    /^steam-\d+\.svg$/.test(f),
+  );
+
+  await Promise.all(fileToDel.map(async (f) => await unlink(f)));
+
   console.log("Complete");
 }
 
