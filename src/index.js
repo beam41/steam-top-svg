@@ -9,28 +9,33 @@ async function main() {
   const steamId = core.getInput("steamId", { required: true });
   const rawBasePath = core.getInput("rawBasePath", { required: true });
 
+  console.time("Get stats");
   const stats = await getStats(apiKey, steamId);
+  console.timeEnd("Get stats");
 
   if (stats.length === 0) {
     console.error("No steam stats, exit");
     return;
   }
 
-  console.log("Draw new img file");
+  console.time("Draw new img file");
   const { content, fullHeight } = await draw(stats);
+  console.timeEnd("Draw new img file");
 
-  console.log("Remove old img file");
+  console.time("Remove old img file");
   const fileToDel = (await readdir(".")).filter((f) =>
     /^steam-\d+\.svg$/.test(f),
   );
+  console.timeEnd("Remove old img file");
 
   await Promise.all(fileToDel.map(async (f) => await unlink(f)));
 
-  console.log("Write new img file");
+  console.time("Write new img file");
   let fileName = `steam-${Date.now()}.svg`;
   await writeFile(fileName, content);
+  console.timeEnd("Write new img file");
 
-  console.log("Write readme");
+  console.time("Write readme");
   let readme = (await readFile("README.md")).toString("utf8");
   let imgTag = $(
     "a",
@@ -48,6 +53,7 @@ async function main() {
       "<!-- steam-svg-end -->",
   );
   await writeFile("README.md", readme);
+  console.timeEnd("Write readme");
 
   console.log("Complete");
 }
