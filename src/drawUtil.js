@@ -24,14 +24,20 @@ function xmlElement(tag, attrs, ...children) {
 
 /**
  * @param {number} minute
+ * @param {boolean} [fraction=false]
  * @return {string} result
  */
-function mapHour(minute) {
+function mapTime(minute, fraction = false) {
+  if (minute < 60) {
+    return minute + "m";
+  }
+
   const str = (minute / 60).toLocaleString("en-US", {
-    maximumFractionDigits: 1,
+    maximumFractionDigits: fraction ? 1 : 0,
     minimumFractionDigits: 0,
   });
-  return str === "0" ? "0.1" : str;
+
+  return str + "h";
 }
 
-module.exports = { xmlElement, mapHour };
+module.exports = { xmlElement, mapTime };

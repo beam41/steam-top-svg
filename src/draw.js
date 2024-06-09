@@ -5,7 +5,7 @@ const {
   fitText,
   measureText,
 } = require("./util");
-const { xmlElement: $, mapHour } = require("./drawUtil");
+const { xmlElement: $, mapTime } = require("./drawUtil");
 
 /**
  * @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]} game
@@ -39,11 +39,9 @@ async function draw(game) {
       ),
     ),
     $("image", {
-      href: `data:image/jpeg;base64,${
-        await loadImgBufferBase64(
-          `https://cdn.cloudflare.steamstatic.com/steam/apps/${game0.id}/header.jpg`,
-        )
-      }`,
+      href: `data:image/jpeg;base64,${await loadImgBufferBase64(
+        `https://cdn.cloudflare.steamstatic.com/steam/apps/${game0.id}/header.jpg`,
+      )}`,
       x: 0,
       y: 0,
       width: 225,
@@ -84,7 +82,7 @@ async function draw(game) {
         "font-size": 10,
         "font-weight": 600,
       },
-      `${mapHour(game0.time2w)}h (2 weeks)/${mapHour(game0.timeTotal)}h (total)`,
+      `${mapTime(game0.time2w, true)} (2 weeks)/${mapTime(game0.timeTotal, true)} (total)`,
     ),
     ...(await Promise.all(
       game.slice(1).map((v, i) => drawOther(v, 105 + 32 * i)),
@@ -106,7 +104,7 @@ async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
   const dominantColor = await getDominantColor(imgBuffer);
   const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";
 
-  const playtimeText = `${mapHour(time2w)}h/${mapHour(timeTotal)}h`;
+  const playtimeText = `${mapTime(time2w)}/${mapTime(timeTotal)}`;
   const playtimeWidth = measureText(playtimeText, "sans-serif", 11);
 
   return [
