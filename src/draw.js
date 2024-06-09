@@ -7,7 +7,10 @@ const {
 } = require("./util");
 const { xmlElement: $, mapHour } = require("./drawUtil");
 
-/** @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]} game */
+/**
+ * @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]} game
+ * @return {Promise<{content: string, fullHeight: number}>}
+ */
 async function draw(game) {
   const game0 = game[0];
 
@@ -84,7 +87,7 @@ async function draw(game) {
       `${mapHour(game0.time2w)}h (2 weeks)/${mapHour(game0.timeTotal)}h (total)`,
     ),
     ...(await Promise.all(
-      game.slice(1).map(async (v, i) => await drawOther(v, 105 + 32 * i)),
+      game.slice(1).map((v, i) => drawOther(v, 105 + 32 * i)),
     )),
   );
 
@@ -94,6 +97,7 @@ async function draw(game) {
 /**
  * @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}} game
  * @param {number} positionY
+ * @return {Promise<string>}
  */
 async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
   const imgBuffer = await loadImgBuffer(
