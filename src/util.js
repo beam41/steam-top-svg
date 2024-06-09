@@ -77,4 +77,4 @@ function measureText(text, font, fontSize, isBold = false) {
   return ctx.measureText(text).width;
 }
 
-module.exports = { loadImgBuffer, getDominantColor, fitText, measureText };
+module.exports = { loadImgBuffer, loadImgBufferBase64, getDominantColor, fitText, measureText };
