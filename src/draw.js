@@ -8,7 +8,7 @@ const { xmlElement: $, mapHour } = require("./drawUtil");
 
 /** @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]} game */
 async function draw(game) {
-  const game0 = game.shift();
+  const game0 = game[0];
 
   const fullHeight = 105 + 32 * game.length;
 
