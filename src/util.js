@@ -10,11 +10,17 @@ const { v4: uuidv4 } = require("uuid");
  * @return {Promise<Buffer>}
  */
 async function loadImgBuffer(url) {
-  console.time(`Load image ${url}`);
   const res = await fetch(url, {});
-  const buffer = await res.buffer();
-  console.timeEnd(`Load image ${url}`);
-  return buffer;
+  return res.buffer();
+}
+
+/**
+ * @param {string} url
+ * @return {Promise<string>}
+ */
+async function loadImgBufferBase64(url) {
+  const buffer = await loadImgBuffer(url);
+  return buffer.toString("base64");
 }
 
 /**

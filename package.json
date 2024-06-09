@@ -27,6 +27,9 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/color": "^3.0.6",
+    "@types/node-fetch": "2.x",
+    "@types/uuid": "^9.0.8",
     "prettier": "^3.3.1"
   },
   "packageManager": "pnpm@9.2.0"

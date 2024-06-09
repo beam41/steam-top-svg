@@ -1,5 +1,5 @@
 const {
-  loadImgBuffer,
+  loadImgBufferBase64,
   getDominantColor,
   fitText,
   measureText,
@@ -35,11 +35,11 @@ async function draw(game) {
       ),
     ),
     $("image", {
-      href: `data:image/jpeg;base64,${(
-        await loadImgBuffer(
+      href: `data:image/jpeg;base64,${
+        await loadImgBufferBase64(
           `https://cdn.cloudflare.steamstatic.com/steam/apps/${game0.id}/header.jpg`,
         )
-      ).toString("base64")}`,
+      }`,
       x: 0,
       y: 0,
       width: 225,
