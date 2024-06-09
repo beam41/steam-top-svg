@@ -3,6 +3,7 @@ const Color = require("color");
 const colorthief = require("colorthief");
 const { writeFile, unlink } = require("fs").promises;
 const { createCanvas } = require("canvas");
+const { v4: uuidv4 } = require("uuid");
 
 /**
  * @param {string} url
@@ -19,14 +20,15 @@ function loadImgBuffer(url) {
  * @return {Color}
  */
 async function getDominantColor(buffer) {
+  const imgPath = `tempImg_${uuidv4()}.jpg`;
   try {
-    await writeFile("tempImg.jpg", buffer);
-    const result = await colorthief.getColor("tempImg.jpg", 1);
+    await writeFile(imgPath, buffer);
+    const result = await colorthief.getColor(imgPath, 1);
     return Color.rgb(result);
   } catch {
     return Color.rgb(62, 78, 105);
   } finally {
-    await unlink("tempImg.jpg");
+    await unlink(imgPath);
   }
 }
 
