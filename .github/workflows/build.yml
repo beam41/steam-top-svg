@@ -18,11 +18,11 @@ jobs:
           node-version: 16
           cache: 'npm'
       - name: Install Node modules
-        run: npm install
+        run: npm ci
       - name: Install ncc
         run: npm i -g @vercel/ncc
       - name: Build dist
-        run: ncc build index.js
+        run: ncc build src/index.js
       - name: Commit file
         run: |
           git config --local user.email "action@github.com"
