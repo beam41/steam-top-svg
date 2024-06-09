@@ -1,4 +1,5 @@
 const {
+  loadImgBuffer,
   loadImgBufferBase64,
   getDominantColor,
   fitText,
