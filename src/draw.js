@@ -164,7 +164,7 @@ async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
         "font-size": 11,
         "font-weight": 600,
       },
-      fitText(name, "Arial", 11, 176 - playtimeWidth, true),
+      fitText(name, "Arial", 11, 175 - playtimeWidth, true),
     ),
     $(
       "text",
