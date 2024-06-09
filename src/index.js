@@ -19,6 +19,13 @@ async function main() {
   console.log("Draw new img file");
   const { content, fullHeight } = await draw(stats);
 
+  console.log("Remove old img file");
+  const fileToDel = (await readdir(".")).filter((f) =>
+    /^steam-\d+\.svg$/.test(f),
+  );
+
+  await Promise.all(fileToDel.map(async (f) => await unlink(f)));
+
   console.log("Write new img file");
   let fileName = `steam-${Date.now()}.svg`;
   await writeFile(fileName, content);
@@ -41,13 +48,6 @@ async function main() {
       "<!-- steam-svg-end -->",
   );
   await writeFile("README.md", readme);
-
-  console.log("Remove old img file");
-  const fileToDel = (await readdir(".")).filter((f) =>
-    /^steam-\d+\.svg$/.test(f),
-  );
-
-  await Promise.all(fileToDel.map(async (f) => await unlink(f)));
 
   console.log("Complete");
 }
