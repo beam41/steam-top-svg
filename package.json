@@ -2,9 +2,9 @@
   "name": "steam-top-svg",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,7 @@
     "colorthief": "^2.3.2",
     "node-fetch": "^2.6.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "prettier": "^3.3.1"
+  }
 }

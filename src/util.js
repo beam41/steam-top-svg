@@ -4,12 +4,20 @@ const colorthief = require("colorthief");
 const { writeFile, unlink } = require("fs").promises;
 const { createCanvas } = require("canvas");
 
+/**
+ * @param {string} url
+ * @return {Promise<Buffer>}
+ */
 function loadImgBuffer(url) {
   return new Promise((resolve, reject) => {
     fetch(url, {}).then((response) => resolve(response.buffer()));
   });
 }
 
+/**
+ * @param {Buffer} buffer
+ * @return {Color}
+ */
 async function getDominantColor(buffer) {
   try {
     await writeFile("tempImg.jpg", buffer);
@@ -22,6 +30,14 @@ async function getDominantColor(buffer) {
   }
 }
 
+/**
+ * @param {string} text
+ * @param {string} font
+ * @param {number} fontSize
+ * @param {number} maxWidth
+ * @param {boolean} [isBold=false]
+ * @return {string} Text with ellipsis to fit `maxWidth`
+ */
 function fitText(text, font, fontSize, maxWidth, isBold = false) {
   const canvas = createCanvas(maxWidth, fontSize);
   const ctx = canvas.getContext("2d");
@@ -30,13 +46,20 @@ function fitText(text, font, fontSize, maxWidth, isBold = false) {
   while (true) {
     const currWidth = ctx.measureText(text + (ellipsis ? "..." : "")).width;
     if (currWidth <= maxWidth) {
-      return text.replace(/&/g, '&amp;') + (ellipsis ? "..." : "");
+      return text.replace(/&/g, "&amp;") + (ellipsis ? "..." : "");
     }
     text = text.substring(0, text.length - 1);
     ellipsis = true;
   }
 }
 
+/**
+ * @param {string} text
+ * @param {string} font
+ * @param {number} fontSize
+ * @param {boolean} [isBold=false]
+ * @return {number} Text width
+ */
 function measureText(text, font, fontSize, isBold = false) {
   const canvas = createCanvas(2000, fontSize);
   const ctx = canvas.getContext("2d");
