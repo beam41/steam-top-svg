@@ -50148,7 +50148,7 @@ async function main() {
   const steamId = core.getInput("steamId", { required: true });
   const rawBasePath = core.getInput("rawBasePath", { required: true });
 
-  const stats = await getStats(apiKey, rawBasePath);
+  const stats = await getStats(apiKey, steamId);
 
   if (stats.length === 0) {
     console.error("No steam stats, exit");
