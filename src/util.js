@@ -11,7 +11,8 @@ const { v4: uuidv4 } = require("uuid");
  */
 async function loadImgBuffer(url) {
   console.time(`Load image ${url}`);
-  const buffer =  fetch(url, {}).then((response) => response.buffer());
+  const res = await fetch(url, {});
+  const buffer = await res.buffer();
   console.timeEnd(`Load image ${url}`);
   return buffer;
 }
