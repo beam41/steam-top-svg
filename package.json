@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "dev": "node src/index.js"
+    "dev": "node src/index.js",
+    "build": "ncc build src/index.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "@types/color": "^3.0.6",
     "@types/node-fetch": "2.x",
     "@types/uuid": "^9.0.8",
+    "@vercel/ncc": "^0.38.1",
     "prettier": "^3.3.1"
   },
   "packageManager": "pnpm@9.2.0"

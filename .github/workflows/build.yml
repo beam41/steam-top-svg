@@ -23,10 +23,8 @@ jobs:
           cache: 'pnpm'
       - name: Install Node modules
         run: pnpm install
-      - name: Install ncc
-        run: npm i -g @vercel/ncc
       - name: Build dist
-        run: ncc build src/index.js
+        run: pnpm build
       - name: Commit file
         run: |
           git config --local user.email "action@github.com"
