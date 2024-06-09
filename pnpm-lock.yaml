@@ -21,8 +21,8 @@ dependencies:
     specifier: ^2.3.2
     version: 2.3.2
   node-fetch:
-    specifier: ^2.6.0
-    version: 2.6.0
+    specifier: ^2.7.0
+    version: 2.7.0
   uuid:
     specifier: ^9.0.1
     version: 9.0.1
@@ -684,11 +684,6 @@ packages:
   /node-bitmap@0.0.1:
     resolution: {integrity: sha512-Jx5lPaaLdIaOsj2mVLWMWulXF6GQVdyLvNSxmiYCvZ8Ma2hfKX0POoR2kgKOqz+oFsRreq0yYZjQ2wjE9VNzCA==}
     engines: {node: '>=v0.6.5'}
-    dev: false
-
-  /node-fetch@2.6.0:
-    resolution: {integrity: sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==}
-    engines: {node: 4.x || >=6.0.0}
     dev: false
 
   /node-fetch@2.7.0:
