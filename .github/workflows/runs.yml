@@ -1,8 +1,7 @@
 on:
   push:
-    paths:
-      - 'dist/**'
-      - '.github/**'
+    paths-ignore:
+      - 'src/**'
 
 jobs:
   spotify-to-readme-job:

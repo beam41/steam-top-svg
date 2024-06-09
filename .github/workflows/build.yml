@@ -1,8 +1,7 @@
 on:
   push:
-    paths-ignore:
-      - 'dist/**'
-      - README.md
+    paths:
+      - 'src/**'
 
 jobs:
   build:
