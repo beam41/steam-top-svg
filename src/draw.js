@@ -14,7 +14,7 @@ const { xmlElement: $, mapTime } = require("./drawUtil");
 async function draw(game) {
   const game0 = game[0];
 
-  const fullHeight = 105 + 32 * game.length;
+  const fullHeight = 105 + 32 * (game.length - 1);
 
   const content = $(
     "svg",

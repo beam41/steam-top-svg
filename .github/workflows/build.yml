@@ -37,31 +37,31 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
           force: true
-#  steam-to-readme-job:
-#    needs: build
-#    runs-on: windows-2019
-#    name: Write steam svg
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@main
-#        with:
-#          persist-credentials: false
-#          fetch-depth: 0
-#      - name: Get info from steam and write new readme
-#        id: spotify
-#        uses: beam41/steam-top-svg@main
-#        with:
-#          rawBasePath: https://raw.githubusercontent.com/beam41/steam-top-svg/main/
-#          apiKey: ${{ secrets.STEAM_KEY }}
-#          steamId: '76561198062644260'
-#      - name: Commit file
-#        run: |
-#          git config --local user.email "action@github.com"
-#          git config --local user.name "GitHub Action"
-#          git add .
-#          git commit -m "Update Spotify data to readme"
-#      - name: Push change
-#        uses: ad-m/github-push-action@master
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          branch: ${{ github.ref }}
+  steam-to-readme-job:
+    needs: build
+    runs-on: windows-2019
+    name: Write steam svg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Get info from steam and write new readme
+        id: spotify
+        uses: beam41/steam-top-svg@main
+        with:
+          rawBasePath: https://raw.githubusercontent.com/beam41/steam-top-svg/main/
+          apiKey: ${{ secrets.STEAM_KEY }}
+          steamId: '76561198062644260'
+      - name: Commit file
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update Spotify data to readme"
+      - name: Push change
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
