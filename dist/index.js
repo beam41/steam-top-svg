@@ -73759,8 +73759,9 @@ const {
   getDominantColor,
   fitText,
   measureText,
+  xmlElement: $,
+  mapTime,
 } = __nccwpck_require__(3001);
-const { xmlElement: $, mapTime } = __nccwpck_require__(4058);
 
 /**
  * @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]} game
@@ -73837,7 +73838,7 @@ async function draw(game) {
         "font-size": 10,
         "font-weight": 600,
       },
-      `${mapTime(game0.time2w, 1)} (2 weeks) / ${mapTime(game0.timeTotal, 1)} (total)`,
+      `${mapTime(game0.time2w, true)} (2 weeks) / ${mapTime(game0.timeTotal, true)} (total)`,
     ),
     ...(await Promise.all(
       game.slice(1).map((v, i) => drawOther(v, 105 + 32 * i)),
@@ -73938,56 +73939,6 @@ async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
 }
 
 module.exports = { draw };
-
-
-/***/ }),
-
-/***/ 4058:
-/***/ ((module) => {
-
-/**
- * @param {string} tag
- * @param {Object.<string, *>?} attrs
- * @param {...string} children
- * @return {string} result html element
- */
-function xmlElement(tag, attrs, ...children) {
-  let element = `<${tag}`;
-
-  if (attrs) {
-    for (const [name, value] of Object.entries(attrs)) {
-      element += ` ${name}="${value}"`;
-    }
-  }
-
-  if (children.length === 0) {
-    element += "/>";
-  } else {
-    element += `>${children.join("")}</${tag}>`;
-  }
-
-  return element;
-}
-
-/**
- * @param {number} minute
- * @param {number} [fraction=0]
- * @return {string} result
- */
-function mapTime(minute, fraction = 0) {
-  if (minute < 60) {
-    return minute + "m";
-  }
-
-  const str = (minute / 60).toLocaleString("en-US", {
-    maximumFractionDigits: fraction,
-    minimumFractionDigits: 0,
-  });
-
-  return str + "h";
-}
-
-module.exports = { xmlElement, mapTime };
 
 
 /***/ }),
@@ -74105,12 +74056,58 @@ function measureText(text, font, fontSize, isBold = false) {
   return ctx.measureText(text).width;
 }
 
+/**
+ * @param {string} tag
+ * @param {Object.<string, *>?} attrs
+ * @param {...string} children
+ * @return {string} result html element
+ */
+function xmlElement(tag, attrs, ...children) {
+  let element = `<${tag}`;
+
+  if (attrs) {
+    for (const [name, value] of Object.entries(attrs)) {
+      element += ` ${name}="${value}"`;
+    }
+  }
+
+  if (children.length === 0) {
+    element += "/>";
+  } else {
+    element += `>${children.join("")}</${tag}>`;
+  }
+
+  return element;
+}
+
+/**
+ * @param {number} minute
+ * @param {boolean} [forceFraction=false]
+ * @return {string} result
+ */
+function mapTime(minute, forceFraction = false) {
+  if (minute < 60) {
+    return minute + "m";
+  }
+
+  const hour = minute / 60;
+
+  const str = hour.toLocaleString("en-US", {
+    maximumFractionDigits: forceFraction ? 1 : hour < 10 ? 1 : 0,
+    minimumFractionDigits: 0,
+  });
+
+  return str + "h";
+}
+
 module.exports = {
   loadImgBuffer,
   loadImgBufferBase64,
   getDominantColor,
   fitText,
   measureText,
+  xmlElement,
+  mapTime,
 };
 
 
@@ -76233,7 +76230,7 @@ const core = __nccwpck_require__(9093);
 const { readFile, writeFile, readdir, unlink } = (__nccwpck_require__(7147).promises);
 const { draw } = __nccwpck_require__(8387);
 const { getStats } = __nccwpck_require__(9369);
-const { xmlElement: $ } = __nccwpck_require__(4058);
+const { xmlElement: $ } = __nccwpck_require__(3001);
 
 async function main() {
   const apiKey = core.getInput("apiKey", { required: true });
