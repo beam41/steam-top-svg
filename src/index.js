@@ -2,7 +2,7 @@ const core = require("@actions/core");
 const { readFile, writeFile, readdir, unlink } = require("fs").promises;
 const { draw } = require("./draw");
 const { getStats } = require("./steam");
-const { xmlElement: $ } = require("./drawUtil");
+const { xmlElement: $ } = require("./util");
 
 async function main() {
   const apiKey = core.getInput("apiKey", { required: true });
