@@ -82,7 +82,7 @@ async function draw(game) {
         "font-size": 10,
         "font-weight": 600,
       },
-      `${mapTime(game0.time2w, true)} (2 weeks) / ${mapTime(game0.timeTotal, true)} (total)`,
+      `${mapTime(game0.time2w, 1)} (2 weeks) / ${mapTime(game0.timeTotal, 1)} (total)`,
     ),
     ...(await Promise.all(
       game.slice(1).map((v, i) => drawOther(v, 105 + 32 * i)),

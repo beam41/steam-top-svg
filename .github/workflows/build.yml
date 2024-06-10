@@ -14,6 +14,7 @@ jobs:
         uses: actions/checkout@main
         with:
           persist-credentials: false
+          fetch-depth: 0
       - name: Install pnpm
         uses: pnpm/action-setup@v4
       - name: Setup Node.js environment
@@ -45,10 +46,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
         with:
+          ref: ${{ github.ref }}
           persist-credentials: false
           fetch-depth: 0
       - name: Get info from steam and write new readme
-        id: spotify
         uses: beam41/steam-top-svg@main
         with:
           rawBasePath: https://raw.githubusercontent.com/beam41/steam-top-svg/main/
@@ -59,7 +60,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git commit -m "Update Spotify data to readme"
+          git commit -m "Update Steam data to readme"
       - name: Push change
         uses: ad-m/github-push-action@master
         with:

@@ -15,25 +15,25 @@ function xmlElement(tag, attrs, ...children) {
 
   if (children.length === 0) {
     element += "/>";
-    return element;
+  } else {
+    element += `>${children.join("")}</${tag}>`;
   }
 
-  element += `>${children.join("")}</${tag}>`;
   return element;
 }
 
 /**
  * @param {number} minute
- * @param {boolean} [fraction=false]
+ * @param {number} [fraction=0]
  * @return {string} result
  */
-function mapTime(minute, fraction = false) {
+function mapTime(minute, fraction = 0) {
   if (minute < 60) {
     return minute + "m";
   }
 
-  const str = (minute / 60).toLocaleString("en-US", {
-    maximumFractionDigits: fraction ? 1 : 0,
+  const str = (minute / 60).toPrecision({
+    maximumFractionDigits: fraction,
     minimumFractionDigits: 0,
   });
 
