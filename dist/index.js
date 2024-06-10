@@ -73837,7 +73837,7 @@ async function draw(game) {
         "font-size": 10,
         "font-weight": 600,
       },
-      `${mapTime(game0.time2w, true)} (2 weeks) / ${mapTime(game0.timeTotal, true)} (total)`,
+      `${mapTime(game0.time2w, 1)} (2 weeks) / ${mapTime(game0.timeTotal, 1)} (total)`,
     ),
     ...(await Promise.all(
       game.slice(1).map((v, i) => drawOther(v, 105 + 32 * i)),
@@ -73962,25 +73962,25 @@ function xmlElement(tag, attrs, ...children) {
 
   if (children.length === 0) {
     element += "/>";
-    return element;
+  } else {
+    element += `>${children.join("")}</${tag}>`;
   }
 
-  element += `>${children.join("")}</${tag}>`;
   return element;
 }
 
 /**
  * @param {number} minute
- * @param {boolean} [fraction=false]
+ * @param {number} [fraction=0]
  * @return {string} result
  */
-function mapTime(minute, fraction = false) {
+function mapTime(minute, fraction = 0) {
   if (minute < 60) {
     return minute + "m";
   }
 
-  const str = (minute / 60).toLocaleString("en-US", {
-    maximumFractionDigits: fraction ? 1 : 0,
+  const str = (minute / 60).toPrecision({
+    maximumFractionDigits: fraction,
     minimumFractionDigits: 0,
   });
 
