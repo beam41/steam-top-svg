@@ -73769,7 +73769,7 @@ const { xmlElement: $, mapTime } = __nccwpck_require__(4058);
 async function draw(game) {
   const game0 = game[0];
 
-  const fullHeight = 105 + 32 * game.length;
+  const fullHeight = 105 + 32 * (game.length - 1);
 
   const content = $(
     "svg",
