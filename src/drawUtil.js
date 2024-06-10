@@ -32,7 +32,7 @@ function mapTime(minute, fraction = 0) {
     return minute + "m";
   }
 
-  const str = (minute / 60).toPrecision({
+  const str = (minute / 60).toLocaleString("en-US", {
     maximumFractionDigits: fraction,
     minimumFractionDigits: 0,
   });
