@@ -62,7 +62,7 @@ async function draw(game) {
       {
         x: 8,
         y: 84,
-        fill: "#c9d1d9",
+        fill: TEXT_WHITE,
         "font-family": "Arial",
         "dominant-baseline": "text-top",
         "text-anchor": "start",
@@ -76,7 +76,7 @@ async function draw(game) {
       {
         x: 8,
         y: 97,
-        fill: "#c9d1d9",
+        fill: TEXT_WHITE,
         "font-family": "Arial",
         "dominant-baseline": "text-top",
         "text-anchor": "start",
@@ -103,7 +103,7 @@ async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
     `http://media.steampowered.com/steamcommunity/public/images/apps/${id}/${imgIco}.jpg`,
   );
   const dominantColor = await getDominantColor(imgBuffer);
-  const textColor = dominantColor.isDark() ? "#c9d1d9" : "#24292f";
+  const textColor = dominantColor.isDark() ? TEXT_WHITE : TEXT_BLACK;
 
   const playtimeText = `${mapTime(time2w)} / ${mapTime(timeTotal)}`;
   const playtimeWidth = measureText(playtimeText, "Arial", 11);
