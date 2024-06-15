@@ -7,6 +7,7 @@ const {
   xmlElement: $,
   mapTime,
 } = require("./util");
+const {TEXT_WHITE, TEXT_BLACK} = require("./const");
 
 /**
  * @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]} game
