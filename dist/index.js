@@ -86988,7 +86988,7 @@ function xmlElement(tag, attrs, ...children) {
 
   if (attrs) {
     for (const [name, value] of Object.entries(attrs)) {
-      element += ` ${name}="${value.replaceAll('"', "&quot;")}"`;
+      element += ` ${name}="${value.replace(/"/g, "&quot;")}"`;
     }
   }
 
