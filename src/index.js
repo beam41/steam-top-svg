@@ -1,5 +1,5 @@
 const core = require("@actions/core");
-const { readdir, readFile, unlink, writeFile } = require("node:fs/promises");
+const { readdir, readFile, unlink, writeFile } = require("node:fs").promises;
 const { draw } = require("./draw");
 const { getStats } = require("./steam");
 const { xmlElement: $ } = require("./util");
