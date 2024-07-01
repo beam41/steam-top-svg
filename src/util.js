@@ -3,7 +3,7 @@ const path = require("node:path");
 const { fileURLToPath } = require("node:url");
 const { loadSync } = require("opentype.js");
 const { v4: uuidv4 } = require("uuid");
-const { unlink, writeFile } = require("fs");
+const { unlink, writeFile } = require("node:fs").promises;
 const Color = require("color");
 const fetch = require("node-fetch");
 
