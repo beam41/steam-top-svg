@@ -1,13 +1,13 @@
-const {
+import {
+  fitText,
+  getDominantColor,
   loadImgBuffer,
   loadImgBufferBase64,
-  getDominantColor,
-  fitText,
-  measureText,
-  xmlElement: $,
   mapTime,
-} = require("./util");
-const { TEXT_WHITE, TEXT_BLACK } = require("./const");
+  measureText,
+  xmlElement as $,
+} from "./util";
+import { TEXT_BLACK, TEXT_WHITE } from "./const";
 
 /**
  * @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]} game
