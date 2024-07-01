@@ -1,11 +1,11 @@
-import colorthief from "colorthief/src/color-thief-node";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { loadSync } from "opentype.js";
-import { v4 as uuidv4 } from "uuid";
-import { unlink, writeFile } from "fs";
-import Color from "color";
-import fetch from "node-fetch";
+const colorthief = require("colorthief/src/color-thief-node");
+const path = require("node:path");
+const { fileURLToPath } = require("node:url");
+const { loadSync } = require("opentype.js");
+const { v4: uuidv4 } = require("uuid");
+const { unlink, writeFile } = require("fs");
+const Color = require("color");
+const fetch = require("node-fetch");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -1,2 +1,7 @@
-export const TEXT_BLACK = "#000"
-export const TEXT_WHITE = "#fff"
+const TEXT_BLACK = "#000";
+const TEXT_WHITE = "#fff";
+
+module.exports = {
+  TEXT_BLACK,
+  TEXT_WHITE,
+};

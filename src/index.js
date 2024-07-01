@@ -1,8 +1,8 @@
-import core from "@actions/core";
-import { readdir, readFile, unlink, writeFile } from "node:fs/promises";
-import { draw } from "./draw";
-import { getStats } from "./steam";
-import { xmlElement as $ } from "./util";
+const core = require("@actions/core");
+const { readdir, readFile, unlink, writeFile } = require("node:fs/promises");
+const { draw } = require("./draw");
+const { getStats } = require("./steam");
+const { xmlElement: $ } = require("./util");
 
 async function main() {
   const apiKey = core.getInput("apiKey", { required: true });
