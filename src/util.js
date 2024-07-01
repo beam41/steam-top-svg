@@ -1,6 +1,5 @@
 const fetch = require("node-fetch");
 const Color = require("color");
-const colorthief = require("colorthief");
 const { writeFile, unlink } = require("fs").promises;
 const { v4: uuidv4 } = require("uuid");
 const { loadSync } = require("opentype.js");
@@ -42,16 +41,17 @@ async function loadImgBufferBase64(url) {
  * @return {Color}
  */
 async function getDominantColor(buffer) {
-  const imgPath = `tempImg_${uuidv4()}.jpg`;
-  try {
-    await writeFile(imgPath, buffer);
-    const result = await colorthief.getColor(imgPath, 1);
-    return Color.rgb(result);
-  } catch {
-    return Color.rgb(62, 78, 105);
-  } finally {
-    await unlink(imgPath);
-  }
+  return Color.rgb(62, 78, 105);
+  // const imgPath = `tempImg_${uuidv4()}.jpg`;
+  // try {
+  //   await writeFile(imgPath, buffer);
+  //   const result = await colorthief.getColor(imgPath, 1);
+  //   return Color.rgb(result);
+  // } catch {
+  //
+  // } finally {
+  //   await unlink(imgPath);
+  // }
 }
 
 /**
