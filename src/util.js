@@ -98,7 +98,7 @@ function xmlElement(tag, attrs, ...children) {
 
   if (attrs) {
     for (const [name, value] of Object.entries(attrs)) {
-      element += ` ${name}="${value.replace(/"/g, "&quot;")}"`;
+      element += ` ${name}="${typeof value === "string" ? value.replace(/"/g, "&quot;") : value}"`;
     }
   }
 
