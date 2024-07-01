@@ -87146,11 +87146,11 @@ module.exports = require("node:events");
 
 /***/ }),
 
-/***/ 3977:
+/***/ 7561:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("node:fs/promises");
+module.exports = require("node:fs");
 
 /***/ }),
 
@@ -89157,7 +89157,7 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(9093);
-const { readdir, readFile, unlink, writeFile } = __nccwpck_require__(3977);
+const { readdir, readFile, unlink, writeFile } = (__nccwpck_require__(7561).promises);
 const { draw } = __nccwpck_require__(8387);
 const { getStats } = __nccwpck_require__(9369);
 const { xmlElement: $ } = __nccwpck_require__(3001);
