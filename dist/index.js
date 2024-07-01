@@ -86897,9 +86897,6 @@ const { unlink, writeFile } = __nccwpck_require__(7147);
 const Color = __nccwpck_require__(5518);
 const fetch = __nccwpck_require__(8761);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 console.log(__dirname);
 
 const notoFont = loadSync(
