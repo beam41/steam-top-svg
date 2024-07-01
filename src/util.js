@@ -7,9 +7,6 @@ const { unlink, writeFile } = require("fs");
 const Color = require("color");
 const fetch = require("node-fetch");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 console.log(__dirname);
 
 const notoFont = loadSync(
