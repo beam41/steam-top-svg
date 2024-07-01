@@ -3,7 +3,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -19,6 +19,8 @@ jobs:
           cache: 'pnpm'
       - name: Install Node modules
         run: pnpm install
+      - name: Remove dist
+        run: rm -rf ./dist
       - name: Build dist
         run: pnpm build
       - name: Commit file
@@ -35,7 +37,7 @@ jobs:
           force: true
   steam-to-readme-job:
     needs: build
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     name: Write steam svg
     steps:
       - name: Checkout

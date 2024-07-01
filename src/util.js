@@ -5,8 +5,8 @@ const { writeFile, unlink } = require("fs").promises;
 const { v4: uuidv4 } = require("uuid");
 const { loadSync } = require("opentype.js");
 
-const notoFont = await loadSync("../static/NotoSans-Regular.ttf");
-const notoBoldFont = await loadSync("../static/NotoSans-Bold.ttf");
+const notoFont = loadSync("../static/NotoSans-Regular.ttf");
+const notoBoldFont = loadSync("../static/NotoSans-Bold.ttf");
 
 /**
  * @param {string} url
