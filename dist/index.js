@@ -86666,7 +86666,7 @@ const {
   measureText,
   xmlElement: $,
   mapTime,
-} = __nccwpck_require__(3001);
+} = __nccwpck_require__(2069);
 const { TEXT_WHITE, TEXT_BLACK } = __nccwpck_require__(4745);
 
 /**
@@ -86885,18 +86885,38 @@ module.exports = { getStats };
 
 /***/ }),
 
-/***/ 3001:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+/***/ 2069:
+/***/ ((module, __webpack_exports__, __nccwpck_require__) => {
 
+"use strict";
+// ESM COMPAT FLAG
+__nccwpck_require__.r(__webpack_exports__);
+
+;// CONCATENATED MODULE: external "node:path"
+const external_node_path_namespaceObject = require("node:path");
+var external_node_path_default = /*#__PURE__*/__nccwpck_require__.n(external_node_path_namespaceObject);
+;// CONCATENATED MODULE: ./src/util.js
+/* module decorator */ module = __nccwpck_require__.hmd(module);
 const fetch = __nccwpck_require__(8761);
 const Color = __nccwpck_require__(5518);
 const colorthief = __nccwpck_require__(4277);
 const { writeFile, unlink } = (__nccwpck_require__(7147).promises);
 const { v4: uuidv4 } = __nccwpck_require__(711);
 const { loadSync } = __nccwpck_require__(6174);
+const { fileURLToPath } = __nccwpck_require__(1041);
 
-const notoFont = loadSync("../static/NotoSans-Regular.ttf");
-const notoBoldFont = loadSync("../static/NotoSans-Bold.ttf");
+
+const util_filename = fileURLToPath(import.meta.url);
+const util_dirname = external_node_path_default().dirname(util_filename);
+
+console.log(util_dirname);
+
+const notoFont = loadSync(
+  external_node_path_default().resolve(util_dirname, "../static/NotoSans-Regular.ttf"),
+);
+const notoBoldFont = loadSync(
+  external_node_path_default().resolve(util_dirname, "../static/NotoSans-Bold.ttf"),
+);
 
 /**
  * @param {string} url
@@ -87139,11 +87159,27 @@ module.exports = require("node:events");
 
 /***/ }),
 
+/***/ 7561:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:fs");
+
+/***/ }),
+
 /***/ 4492:
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("node:stream");
+
+/***/ }),
+
+/***/ 1041:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:url");
 
 /***/ }),
 
@@ -89098,8 +89134,8 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
+/******/ 			id: moduleId,
+/******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
@@ -89112,11 +89148,26 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 			if(threw) delete __webpack_module_cache__[moduleId];
 /******/ 		}
 /******/ 	
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__nccwpck_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__nccwpck_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -89126,6 +89177,21 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/harmony module decorator */
+/******/ 	(() => {
+/******/ 		__nccwpck_require__.hmd = (module) => {
+/******/ 			module = Object.create(module);
+/******/ 			if (!module.children) module.children = [];
+/******/ 			Object.defineProperty(module, 'exports', {
+/******/ 				enumerable: true,
+/******/ 				set: () => {
+/******/ 					throw new Error('ES Modules may not assign module.exports or exports.*, Use ESM export syntax, instead: ' + module.id);
+/******/ 				}
+/******/ 			});
+/******/ 			return module;
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -89154,10 +89220,10 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(9093);
-const { readFile, writeFile, readdir, unlink } = (__nccwpck_require__(7147).promises);
+const { readFile, writeFile, readdir, unlink } = (__nccwpck_require__(7561).promises);
 const { draw } = __nccwpck_require__(8387);
 const { getStats } = __nccwpck_require__(9369);
-const { xmlElement: $ } = __nccwpck_require__(3001);
+const { xmlElement: $ } = __nccwpck_require__(2069);
 
 async function main() {
   const apiKey = core.getInput("apiKey", { required: true });
