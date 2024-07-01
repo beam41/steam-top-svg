@@ -86893,7 +86893,7 @@ const path = __nccwpck_require__(9411);
 const { fileURLToPath } = __nccwpck_require__(1041);
 const { loadSync } = __nccwpck_require__(6174);
 const { v4: uuidv4 } = __nccwpck_require__(711);
-const { unlink, writeFile } = __nccwpck_require__(7147);
+const { unlink, writeFile } = (__nccwpck_require__(7561).promises);
 const Color = __nccwpck_require__(5518);
 const fetch = __nccwpck_require__(8761);
 
