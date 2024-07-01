@@ -86702,7 +86702,7 @@ async function draw(game) {
       $(
         "style",
         { type: "text/css" },
-        "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..900&display=swap');",
+        "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..900&amp;display=swap');",
       ),
     ),
     $("image", {
@@ -86988,7 +86988,7 @@ function xmlElement(tag, attrs, ...children) {
 
   if (attrs) {
     for (const [name, value] of Object.entries(attrs)) {
-      element += ` ${name}="${value.replaceAll('"', '\\"')}"`;
+      element += ` ${name}="${value.replaceAll('"', "&quot;")}"`;
     }
   }
 
