@@ -4,9 +4,20 @@ const colorthief = require("colorthief");
 const { writeFile, unlink } = require("fs").promises;
 const { v4: uuidv4 } = require("uuid");
 const { loadSync } = require("opentype.js");
+const { fileURLToPath } = require("node:url");
+import path from "node:path";
 
-const notoFont = loadSync("../static/NotoSans-Regular.ttf");
-const notoBoldFont = loadSync("../static/NotoSans-Bold.ttf");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+console.log(__dirname);
+
+const notoFont = loadSync(
+  path.resolve(__dirname, "../static/NotoSans-Regular.ttf"),
+);
+const notoBoldFont = loadSync(
+  path.resolve(__dirname, "../static/NotoSans-Bold.ttf"),
+);
 
 /**
  * @param {string} url
