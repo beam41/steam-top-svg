@@ -7,7 +7,7 @@ const {
   xmlElement: $,
   mapTime,
 } = require("./util");
-const {TEXT_WHITE, TEXT_BLACK} = require("./const");
+const { TEXT_WHITE, TEXT_BLACK } = require("./const");
 
 /**
  * @param {{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]} game
@@ -39,6 +39,11 @@ async function draw(game) {
         { id: "fullCliping" },
         $("rect", { x: 0, y: 0, width: 225, height: fullHeight, rx: 4 }),
       ),
+      $(
+        "style",
+        { type: "text/css" },
+        "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..900&display=swap');",
+      ),
     ),
     $("image", {
       href: `data:image/jpeg;base64,${await loadImgBufferBase64(
@@ -64,13 +69,13 @@ async function draw(game) {
         x: 8,
         y: 84,
         fill: TEXT_WHITE,
-        "font-family": "Arial",
+        "font-family": '"Noto Sans", sans-serif',
         "dominant-baseline": "text-top",
         "text-anchor": "start",
         "font-size": 16,
         "font-weight": 600,
       },
-      fitText(game0.name, "Arial", 16, 209, true),
+      fitText(game0.name, 16, 209, true),
     ),
     $(
       "text",
@@ -78,7 +83,7 @@ async function draw(game) {
         x: 8,
         y: 97,
         fill: TEXT_WHITE,
-        "font-family": "Arial",
+        "font-family": '"Noto Sans", sans-serif',
         "dominant-baseline": "text-top",
         "text-anchor": "start",
         "font-size": 10,
@@ -107,7 +112,7 @@ async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
   const textColor = dominantColor.isDark() ? TEXT_WHITE : TEXT_BLACK;
 
   const playtimeText = `${mapTime(time2w)} / ${mapTime(timeTotal)}`;
-  const playtimeWidth = measureText(playtimeText, "Arial", 11);
+  const playtimeWidth = measureText(playtimeText, 11);
 
   return [
     $(
@@ -160,13 +165,13 @@ async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
         x: 40,
         y: positionY + 16,
         fill: textColor,
-        "font-family": "Arial",
+        "font-family": '"Noto Sans", sans-serif',
         "dominant-baseline": "middle",
         "text-anchor": "start",
         "font-size": 11,
         "font-weight": 600,
       },
-      fitText(name, "Arial", 11, 175 - playtimeWidth, true),
+      fitText(name, 11, 175 - playtimeWidth, true),
     ),
     $(
       "text",
@@ -174,7 +179,7 @@ async function drawOther({ id, name, time2w, timeTotal, imgIco }, positionY) {
         x: 217,
         y: positionY + 16,
         fill: textColor,
-        "font-family": "Arial",
+        "font-family": '"Noto Sans", sans-serif',
         "dominant-baseline": "middle",
         "text-anchor": "end",
         "font-size": 11,
