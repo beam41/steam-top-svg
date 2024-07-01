@@ -1,7 +1,5 @@
 import colorthief from "colorthief/src/color-thief-node";
-
 import path from "node:path";
-
 import { fileURLToPath } from "node:url";
 import { loadSync } from "opentype.js";
 import { v4 as uuidv4 } from "uuid";
