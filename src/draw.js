@@ -69,8 +69,9 @@ async function draw(game) {
         x: 8,
         y: 84,
         fill: TEXT_WHITE,
-        style:
-          'font-family: "Noto Sans", sans-serif; font-size: 16; font-weight: 600',
+        "font-family": '"Noto Sans", sans-serif',
+        "font-size": 16,
+        "font-weight": 600,
         "dominant-baseline": "text-top",
         "text-anchor": "start",
       },
@@ -82,8 +83,9 @@ async function draw(game) {
         x: 8,
         y: 97,
         fill: TEXT_WHITE,
-        style:
-          'font-family: "Noto Sans", sans-serif; font-size: 10; font-weight: 600',
+        "font-family": '"Noto Sans", sans-serif',
+        "font-size": 10,
+        "font-weight": 600,
         "dominant-baseline": "text-top",
         "text-anchor": "start",
       },
