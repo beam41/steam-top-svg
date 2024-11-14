@@ -1,4 +1,4 @@
-import core from '@actions/core';
+import * as core from '@actions/core';
 import { readdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import { draw } from './draw';
 import { getStats } from './steam';
