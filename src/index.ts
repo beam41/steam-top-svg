@@ -19,7 +19,7 @@ async function main() {
   }
 
   console.time('Draw new img file');
-  const { content, fullHeight } = await draw(stats, 105, 32, 225, 8, 4);
+  const { content, fullHeight } = await draw(stats, 300, 32, 8, 4);
   console.timeEnd('Draw new img file');
 
   console.time('Remove old img file');

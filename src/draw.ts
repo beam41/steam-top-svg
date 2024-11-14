@@ -12,13 +12,14 @@ import { Game } from './types';
 
 export async function draw(
   game: Game[],
-  firstGameHeight: number,
-  otherGameHeight: number,
   fullWidth: number,
+  otherGameHeight: number,
   padding: number,
   rectRound: number,
 ): Promise<{ content: string; fullHeight: number }> {
   const game0 = game[0];
+
+  const firstGameHeight = fullWidth * (215 / 460);
 
   const fullHeight = firstGameHeight + otherGameHeight * (game.length - 1);
 
@@ -102,8 +103,8 @@ export async function draw(
           drawOther(
             v,
             firstGameHeight + otherGameHeight * i,
-            otherGameHeight,
             fullWidth,
+            otherGameHeight,
             padding,
             rectRound,
           ),
@@ -117,8 +118,8 @@ export async function draw(
 export async function drawOther(
   { id, name, time2w, timeTotal, imgIco }: Game,
   positionY: number,
-  otherGameHeight: number,
   fullWidth: number,
+  otherGameHeight: number,
   padding: number,
   rectRound: number,
 ) {
