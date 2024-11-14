@@ -17,9 +17,9 @@ export async function draw(
   padding: number,
   rectRound: number,
 ): Promise<{ content: string; fullHeight: number }> {
-  const game0 = game[0];
+  const firstGame = game[0];
 
-  const firstGameHeight = fullWidth * (215 / 460);
+  const firstGameHeight = Math.round(fullWidth * (215 / 460));
 
   const fullHeight = firstGameHeight + otherGameHeight * (game.length - 1);
 
@@ -52,13 +52,13 @@ export async function draw(
     ),
     $('image', {
       href: `data:image/jpeg;base64,${await loadImgBufferBase64(
-        `https://cdn.cloudflare.steamstatic.com/steam/apps/${game0.id}/header.jpg`,
+        `https://cdn.cloudflare.steamstatic.com/steam/apps/${firstGame.id}/header.jpg`,
       )}`,
       x: 0,
       y: 0,
       width: fullWidth,
       height: firstGameHeight,
-      preserveAspectRatio: 'xMinYMin',
+      preserveAspectRatio: 'xMidYMid slice',
       'clip-path': 'url(#fullCliping)',
     }),
     $('rect', {
@@ -80,7 +80,7 @@ export async function draw(
         'dominant-baseline': 'text-top',
         'text-anchor': 'start',
       },
-      fitText(game0.name, 16, fullWidth - padding * 2, true),
+      fitText(firstGame.name, 16, fullWidth - padding * 2, true),
     ),
     $(
       'text',
@@ -94,7 +94,7 @@ export async function draw(
         'dominant-baseline': 'text-top',
         'text-anchor': 'start',
       },
-      `${mapTime(game0.time2w, true)} (2 weeks) / ${mapTime(game0.timeTotal, true)} (total)`,
+      `${mapTime(firstGame.time2w, true)} (2 weeks) / ${mapTime(firstGame.timeTotal, true)} (total)`,
     ),
     ...(await Promise.all(
       game
