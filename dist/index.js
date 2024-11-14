@@ -93231,20 +93231,20 @@ var draw_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arg
 
 function draw(game, fullWidth, otherGameHeight, padding, rectRound) {
     return draw_awaiter(this, void 0, void 0, function* () {
-        const game0 = game[0];
-        const firstGameHeight = fullWidth * (215 / 460);
+        const firstGame = game[0];
+        const firstGameHeight = Math.round(fullWidth * (215 / 460));
         const fullHeight = firstGameHeight + otherGameHeight * (game.length - 1);
         const content = xmlElement('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             viewBox: `0 0 ${fullWidth} ${fullHeight}`,
             height: fullHeight,
         }, xmlElement('defs', null, xmlElement('linearGradient', { id: 'gradient', gradientTransform: 'rotate(90)' }, xmlElement('stop', { offset: 0, 'stop-color': 'rgba(0,0,0,0)' }), xmlElement('stop', { offset: 1, 'stop-color': 'rgba(0,0,0,1)' })), xmlElement('clipPath', { id: 'fullCliping' }, xmlElement('rect', { width: fullWidth, height: fullHeight, rx: rectRound })), xmlElement('style', { type: 'text/css' }, "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..900&amp;display=swap');")), xmlElement('image', {
-            href: `data:image/jpeg;base64,${yield loadImgBufferBase64(`https://cdn.cloudflare.steamstatic.com/steam/apps/${game0.id}/header.jpg`)}`,
+            href: `data:image/jpeg;base64,${yield loadImgBufferBase64(`https://cdn.cloudflare.steamstatic.com/steam/apps/${firstGame.id}/header.jpg`)}`,
             x: 0,
             y: 0,
             width: fullWidth,
             height: firstGameHeight,
-            preserveAspectRatio: 'xMinYMin',
+            preserveAspectRatio: 'xMidYMid slice',
             'clip-path': 'url(#fullCliping)',
         }), xmlElement('rect', {
             x: 0,
@@ -93261,7 +93261,7 @@ function draw(game, fullWidth, otherGameHeight, padding, rectRound) {
             'font-weight': 600,
             'dominant-baseline': 'text-top',
             'text-anchor': 'start',
-        }, fitText(game0.name, 16, fullWidth - padding * 2, true)), xmlElement('text', {
+        }, fitText(firstGame.name, 16, fullWidth - padding * 2, true)), xmlElement('text', {
             x: padding,
             y: firstGameHeight - padding,
             fill: TEXT_WHITE,
@@ -93270,7 +93270,7 @@ function draw(game, fullWidth, otherGameHeight, padding, rectRound) {
             'font-weight': 600,
             'dominant-baseline': 'text-top',
             'text-anchor': 'start',
-        }, `${mapTime(game0.time2w, true)} (2 weeks) / ${mapTime(game0.timeTotal, true)} (total)`), ...(yield Promise.all(game
+        }, `${mapTime(firstGame.time2w, true)} (2 weeks) / ${mapTime(firstGame.timeTotal, true)} (total)`), ...(yield Promise.all(game
             .slice(1)
             .map((v, i) => drawOther(v, firstGameHeight + otherGameHeight * i, fullWidth, otherGameHeight, padding, rectRound)))));
         return { content, fullHeight };
