@@ -26,9 +26,8 @@ async function main() {
   const fileToDel = (await readdir('.')).filter((f) =>
     /^steam-\d+\.svg$/.test(f),
   );
-  console.timeEnd('Remove old img file');
-
   await Promise.all(fileToDel.map(async (f) => await unlink(f)));
+  console.timeEnd('Remove old img file');
 
   console.time('Write new img file');
   let fileName = `steam-${Date.now()}.svg`;
