@@ -93407,8 +93407,8 @@ function main() {
         console.timeEnd('Draw new img file');
         console.time('Remove old img file');
         const fileToDel = (yield (0,promises_namespaceObject.readdir)('.')).filter((f) => /^steam-\d+\.svg$/.test(f));
-        console.timeEnd('Remove old img file');
         yield Promise.all(fileToDel.map((f) => src_awaiter(this, void 0, void 0, function* () { return yield (0,promises_namespaceObject.unlink)(f); })));
+        console.timeEnd('Remove old img file');
         console.time('Write new img file');
         let fileName = `steam-${Date.now()}.svg`;
         yield (0,promises_namespaceObject.writeFile)(fileName, content);
