@@ -1,15 +1,11 @@
-const fetch = require("node-fetch");
+import fetch from 'node-fetch';
+import { Game, SteamPlaytimeResponse } from './types';
 
-/**
- * @param {string} key
- * @param {string} id
- * @return {Promise<{id: number, name: string, time2w: number, timeTotal: number, imgIco: string}[]>} game
- */
-async function getStats(key, id) {
+export async function getStats(key: string, id: string): Promise<Game[]> {
   const res = await fetch(
     `https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key=${key}&steamid=${id}`,
   );
-  const json = await res.json();
+  const json = (await res.json()) as SteamPlaytimeResponse;
   return json.response.games
     .filter((game) => game.name)
     .map((game) => ({
@@ -20,5 +16,3 @@ async function getStats(key, id) {
       imgIco: game.img_icon_url,
     }));
 }
-
-module.exports = { getStats };
