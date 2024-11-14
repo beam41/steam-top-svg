@@ -93229,9 +93229,10 @@ var draw_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arg
 };
 
 
-function draw(game, firstGameHeight, otherGameHeight, fullWidth, padding, rectRound) {
+function draw(game, fullWidth, otherGameHeight, padding, rectRound) {
     return draw_awaiter(this, void 0, void 0, function* () {
         const game0 = game[0];
+        const firstGameHeight = fullWidth * (215 / 460);
         const fullHeight = firstGameHeight + otherGameHeight * (game.length - 1);
         const content = xmlElement('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
@@ -93271,12 +93272,12 @@ function draw(game, firstGameHeight, otherGameHeight, fullWidth, padding, rectRo
             'text-anchor': 'start',
         }, `${mapTime(game0.time2w, true)} (2 weeks) / ${mapTime(game0.timeTotal, true)} (total)`), ...(yield Promise.all(game
             .slice(1)
-            .map((v, i) => drawOther(v, firstGameHeight + otherGameHeight * i, otherGameHeight, fullWidth, padding, rectRound)))));
+            .map((v, i) => drawOther(v, firstGameHeight + otherGameHeight * i, fullWidth, otherGameHeight, padding, rectRound)))));
         return { content, fullHeight };
     });
 }
-function drawOther(_a, positionY_1, otherGameHeight_1, fullWidth_1, padding_1, rectRound_1) {
-    return draw_awaiter(this, arguments, void 0, function* ({ id, name, time2w, timeTotal, imgIco }, positionY, otherGameHeight, fullWidth, padding, rectRound) {
+function drawOther(_a, positionY_1, fullWidth_1, otherGameHeight_1, padding_1, rectRound_1) {
+    return draw_awaiter(this, arguments, void 0, function* ({ id, name, time2w, timeTotal, imgIco }, positionY, fullWidth, otherGameHeight, padding, rectRound) {
         const otherGameHeightIcoSize = otherGameHeight - padding;
         const imgBuffer = yield loadImgBuffer(`http://media.steampowered.com/steamcommunity/public/images/apps/${id}/${imgIco}.jpg`);
         const dominantColor = yield getDominantColor(imgBuffer);
@@ -93402,7 +93403,7 @@ function main() {
             return;
         }
         console.time('Draw new img file');
-        const { content, fullHeight } = yield draw(stats, 105, 32, 225, 8, 4);
+        const { content, fullHeight } = yield draw(stats, 300, 32, 8, 4);
         console.timeEnd('Draw new img file');
         console.time('Remove old img file');
         const fileToDel = (yield (0,promises_namespaceObject.readdir)('.')).filter((f) => /^steam-\d+\.svg$/.test(f));
